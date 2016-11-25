@@ -32,8 +32,8 @@ class ListsAddViewController: UIViewController {
         listName!.resignFirstResponder();
     }
     
-    @IBAction func add(){
-        print("Test?");
+    @IBAction func addListName(){
+        print(listName?.text);
         try? manager.create(groceryListName: listName?.text)
         
         dismiss(animated: UIView.areAnimationsEnabled, completion: nil)

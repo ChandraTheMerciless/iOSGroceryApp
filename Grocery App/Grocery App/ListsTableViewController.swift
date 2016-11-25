@@ -15,7 +15,9 @@ class ListsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         manager.data = manager.fetch()
         print("view did load working right?")
         print(manager.data)

@@ -17,7 +17,7 @@ enum GroceryListError: Error {
 class GroceryListManager {
     
     static var shared: GroceryListManager = GroceryListManager()
-    var managedObjectContextList: NSManagedObjectContext?
+    var managedObjectContext: NSManagedObjectContext?
     
     var data: [GroceryList]
     
@@ -25,15 +25,26 @@ class GroceryListManager {
         data = []
     }
     
-    func set(managedObjectContextList: NSManagedObjectContext) {
-        self.managedObjectContextList = managedObjectContextList
+    func set(managedObjectContext: NSManagedObjectContext) {
+        self.managedObjectContext = managedObjectContext
+        print("called on load?")
+        print(managedObjectContext)
+        print(data)
+        print("managed obj cont?")
     }
     
     //if function has throw, wherever you use that func has to be wrapped in try
     func create(groceryListName: (String?)) throws {
-        guard let ctx = managedObjectContextList else {
+        print(self.managedObjectContext)
+        print(managedObjectContext)
+        print("managed context?")
+        
+        guard let ctx = managedObjectContext else {
             throw GroceryListError.BadManagedObjectContext("The managed object context was nil")
         }
+        
+        print(NSEntityDescription.entity(forEntityName: "GroceryList", in: ctx))
+        
         guard let entity = NSEntityDescription.entity(forEntityName: "GroceryList", in: ctx) else {
             throw GroceryListError.BadEntity("The entity description was bad")
         }
@@ -41,13 +52,20 @@ class GroceryListManager {
         let obj = GroceryList(entity: entity, insertInto: ctx)
         obj.groceryListName = groceryListName
         
+        print("first")
+        print(GroceryList(entity: entity, insertInto: ctx))
+        print("second")
+        print(groceryListName)
+        print("third")
+        print(obj.groceryListName)
+        
         try? save()
     }
     
     //needs [weak self] (closure of captured list - needs to be weak because we don't want to capture self, we want to capture weak reference to it so it doesn't force function to run when we don't want it to
     func fetch<T: NSManagedObject>() -> [T] {
         var result: [T]? = nil
-        managedObjectContextList?.performAndWait { [weak self] in
+        managedObjectContext?.performAndWait { [weak self] in
             do {
                 result = try self?.executeFetchRequest()
             }
@@ -55,6 +73,7 @@ class GroceryListManager {
                 print(error)
             }
         }
+        
         return result ?? []
     }
     
@@ -64,6 +83,6 @@ class GroceryListManager {
     }
     
     func save()  throws {
-        try managedObjectContextList?.save()
+        try managedObjectContext?.save()
     }
 }

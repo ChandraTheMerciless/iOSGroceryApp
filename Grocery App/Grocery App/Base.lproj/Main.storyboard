@@ -95,7 +95,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="add" destination="kfe-Hg-2dk" eventType="primaryActionTriggered" id="nmv-EH-TLk"/>
+                                    <action selector="addListName" destination="kfe-Hg-2dk" eventType="primaryActionTriggered" id="gav-ga-fOI"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Grocery List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXX-IQ-SDM">
@@ -173,6 +173,9 @@
                                 <state key="normal" title="Add">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="addItem" destination="Edz-rc-e7B" eventType="primaryActionTriggered" id="6dd-3Z-8vi"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f0b-4o-Qwn">
                                 <rect key="frame" x="16" y="150" width="343" height="40"/>
@@ -191,6 +194,10 @@
                             <constraint firstItem="ZPs-pV-qU0" firstAttribute="leading" secondItem="gDV-z5-X4U" secondAttribute="trailing" constant="15" id="oOF-ka-fjc"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="itemName" destination="Njv-Jg-wEN" id="bGO-SG-MIb"/>
+                        <outlet property="itemQuantiy" destination="f0b-4o-Qwn" id="o6s-xO-44B"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gJj-dK-M67" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -205,13 +212,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemCell" id="qgN-Ij-ANQ">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemCell" id="qgN-Ij-ANQ" customClass="GroceryDataCell" customModule="Grocery_App" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qgN-Ij-ANQ" id="byk-wA-et2">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OjU-2V-maH">
+                                            <rect key="frame" x="33" y="11" width="175" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Ub-eL-SyK">
+                                            <rect key="frame" x="288" y="11" width="65" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="itemName" destination="OjU-2V-maH" id="c02-Bz-Bn9"/>
+                                    <outlet property="itemQuantity" destination="2Ub-eL-SyK" id="Dkp-fZ-xFQ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -228,6 +255,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="GroceryDataView" destination="lba-EB-1qb" id="1tR-RT-pKP"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6EG-zS-7Nr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -254,7 +284,6 @@
         <!--Navigation Controller-->
         <scene sceneID="3DN-mt-uqZ">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zAs-8l-cTc" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XR2-e4-WA1" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Giz-P5-HHT">
@@ -266,6 +295,7 @@
                         <segue destination="W8I-0v-EWW" kind="relationship" relationship="rootViewController" id="F0B-bq-92c"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zAs-8l-cTc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2504.8000000000002" y="792.95352323838085"/>
         </scene>
