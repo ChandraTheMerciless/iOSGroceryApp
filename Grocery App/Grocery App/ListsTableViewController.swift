@@ -17,6 +17,8 @@ class ListsTableViewController: UITableViewController {
         super.viewDidLoad()
 
         manager.data = manager.fetch()
+        print("view did load working right?")
+        print(manager.data)
         GroceryListView?.reloadData()
     }
 

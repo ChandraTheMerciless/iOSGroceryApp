@@ -17,7 +17,7 @@ enum GroceryListError: Error {
 class GroceryListManager {
     
     static var shared: GroceryListManager = GroceryListManager()
-    var managedObjectContext: NSManagedObjectContext?
+    var managedObjectContextList: NSManagedObjectContext?
     
     var data: [GroceryList]
     
@@ -25,16 +25,16 @@ class GroceryListManager {
         data = []
     }
     
-    func set(managedObjectContext: NSManagedObjectContext) {
-        self.managedObjectContext = managedObjectContext
+    func set(managedObjectContextList: NSManagedObjectContext) {
+        self.managedObjectContextList = managedObjectContextList
     }
     
     //if function has throw, wherever you use that func has to be wrapped in try
     func create(groceryListName: (String?)) throws {
-        guard let ctx = managedObjectContext else {
+        guard let ctx = managedObjectContextList else {
             throw GroceryListError.BadManagedObjectContext("The managed object context was nil")
         }
-        guard let entity = NSEntityDescription.entity(forEntityName: "MyData", in: ctx) else {
+        guard let entity = NSEntityDescription.entity(forEntityName: "GroceryList", in: ctx) else {
             throw GroceryListError.BadEntity("The entity description was bad")
         }
         // TODO: Implement Me!
@@ -47,7 +47,7 @@ class GroceryListManager {
     //needs [weak self] (closure of captured list - needs to be weak because we don't want to capture self, we want to capture weak reference to it so it doesn't force function to run when we don't want it to
     func fetch<T: NSManagedObject>() -> [T] {
         var result: [T]? = nil
-        managedObjectContext?.performAndWait { [weak self] in
+        managedObjectContextList?.performAndWait { [weak self] in
             do {
                 result = try self?.executeFetchRequest()
             }
@@ -64,6 +64,6 @@ class GroceryListManager {
     }
     
     func save()  throws {
-        try managedObjectContext?.save()
+        try managedObjectContextList?.save()
     }
 }
