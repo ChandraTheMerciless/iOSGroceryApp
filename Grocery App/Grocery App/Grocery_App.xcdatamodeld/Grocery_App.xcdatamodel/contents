@@ -4,8 +4,13 @@
         <attribute name="itemName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemQuantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="listName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="groceryList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GroceryList" syncable="YES"/>
+    </entity>
+    <entity name="GroceryList" representedClassName="GroceryList" syncable="YES">
+        <attribute name="groceryListName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="GroceryData" positionX="-45" positionY="0" width="128" height="90"/>
+        <element name="GroceryData" positionX="-45" positionY="0" width="128" height="105"/>
+        <element name="GroceryList" positionX="-45" positionY="27" width="128" height="60"/>
     </elements>
 </model>

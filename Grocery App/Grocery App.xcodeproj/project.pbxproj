@@ -19,6 +19,10 @@
 		5B8D5B2E1DE7C82F0061B3EC /* GroceryDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8D5B2D1DE7C82F0061B3EC /* GroceryDataProperties.swift */; };
 		5B8D5B301DE7C8E20061B3EC /* GroceryDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8D5B2F1DE7C8E20061B3EC /* GroceryDataManager.swift */; };
 		5B8D5B321DE7CBCA0061B3EC /* GroceryDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8D5B311DE7CBCA0061B3EC /* GroceryDataClass.swift */; };
+		5B99F4861DE8AB36008CAB43 /* GroceryListClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B99F4851DE8AB36008CAB43 /* GroceryListClass.swift */; };
+		5B99F4881DE8AB4B008CAB43 /* GroceryListProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B99F4871DE8AB4B008CAB43 /* GroceryListProperties.swift */; };
+		5B99F48A1DE8AB59008CAB43 /* GroceryListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B99F4891DE8AB59008CAB43 /* GroceryListManager.swift */; };
+		5B99F48D1DE8B6A3008CAB43 /* GroceryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B99F48C1DE8B6A3008CAB43 /* GroceryListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		5B8D5B2D1DE7C82F0061B3EC /* GroceryDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryDataProperties.swift; sourceTree = "<group>"; };
 		5B8D5B2F1DE7C8E20061B3EC /* GroceryDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryDataManager.swift; sourceTree = "<group>"; };
 		5B8D5B311DE7CBCA0061B3EC /* GroceryDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryDataClass.swift; sourceTree = "<group>"; };
+		5B99F4851DE8AB36008CAB43 /* GroceryListClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListClass.swift; sourceTree = "<group>"; };
+		5B99F4871DE8AB4B008CAB43 /* GroceryListProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListProperties.swift; sourceTree = "<group>"; };
+		5B99F4891DE8AB59008CAB43 /* GroceryListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListManager.swift; sourceTree = "<group>"; };
+		5B99F48C1DE8B6A3008CAB43 /* GroceryListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +76,7 @@
 		5B8D5B0D1DE7B6740061B3EC /* Grocery App */ = {
 			isa = PBXGroup;
 			children = (
+				5B99F48B1DE8B672008CAB43 /* TableCells */,
 				5B8D5B241DE7B73F0061B3EC /* Data */,
 				5B8D5B231DE7B7210061B3EC /* View Controllers */,
 				5B8D5B0E1DE7B6740061B3EC /* AppDelegate.swift */,
@@ -97,8 +106,19 @@
 				5B8D5B2D1DE7C82F0061B3EC /* GroceryDataProperties.swift */,
 				5B8D5B2F1DE7C8E20061B3EC /* GroceryDataManager.swift */,
 				5B8D5B311DE7CBCA0061B3EC /* GroceryDataClass.swift */,
+				5B99F4851DE8AB36008CAB43 /* GroceryListClass.swift */,
+				5B99F4871DE8AB4B008CAB43 /* GroceryListProperties.swift */,
+				5B99F4891DE8AB59008CAB43 /* GroceryListManager.swift */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		5B99F48B1DE8B672008CAB43 /* TableCells */ = {
+			isa = PBXGroup;
+			children = (
+				5B99F48C1DE8B6A3008CAB43 /* GroceryListCell.swift */,
+			);
+			name = TableCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,15 +193,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B99F4881DE8AB4B008CAB43 /* GroceryListProperties.swift in Sources */,
 				5B8D5B171DE7B6740061B3EC /* Grocery_App.xcdatamodeld in Sources */,
 				5B8D5B281DE7C3A90061B3EC /* ItemsTableViewController.swift in Sources */,
 				5B8D5B2C1DE7C4710061B3EC /* ListsAddViewController.swift in Sources */,
 				5B8D5B301DE7C8E20061B3EC /* GroceryDataManager.swift in Sources */,
 				5B8D5B321DE7CBCA0061B3EC /* GroceryDataClass.swift in Sources */,
 				5B8D5B2A1DE7C3FD0061B3EC /* ItemsAddViewController.swift in Sources */,
+				5B99F4861DE8AB36008CAB43 /* GroceryListClass.swift in Sources */,
 				5B8D5B0F1DE7B6740061B3EC /* AppDelegate.swift in Sources */,
+				5B99F48A1DE8AB59008CAB43 /* GroceryListManager.swift in Sources */,
 				5B8D5B261DE7C3760061B3EC /* ListsTableViewController.swift in Sources */,
 				5B8D5B2E1DE7C82F0061B3EC /* GroceryDataProperties.swift in Sources */,
+				5B99F48D1DE8B6A3008CAB43 /* GroceryListCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +367,7 @@
 				5B8D5B221DE7B6740061B3EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

@@ -1,25 +1,25 @@
 //
-//  GroceryDataManager.swift
+//  GroceryListManager.swift
 //  Grocery App
 //
-//  Created by Asar, Chandra on 11/24/16.
+//  Created by Asar, Chandra on 11/25/16.
 //  Copyright © 2016 Asar, Chandra. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-enum GroceryDataError: Error {
+enum GroceryListError: Error {
     case BadManagedObjectContext(String)
     case BadEntity(String)
 }
 
-class GroceryDataManager {
+class GroceryListManager {
     
-    static var shared: GroceryDataManager = GroceryDataManager()
+    static var shared: GroceryListManager = GroceryListManager()
     var managedObjectContext: NSManagedObjectContext?
     
-    var data: [GroceryData]
+    var data: [GroceryList]
     
     private init() {
         data = []
@@ -30,18 +30,16 @@ class GroceryDataManager {
     }
     
     //if function has throw, wherever you use that func has to be wrapped in try
-    func create(data: (listName: String?, itemName: String?, itemQuantity: Int)) throws {
+    func create(groceryListName: (String?)) throws {
         guard let ctx = managedObjectContext else {
-            throw GroceryDataError.BadManagedObjectContext("The managed object context was nil")
+            throw GroceryListError.BadManagedObjectContext("The managed object context was nil")
         }
         guard let entity = NSEntityDescription.entity(forEntityName: "MyData", in: ctx) else {
-            throw GroceryDataError.BadEntity("The entity description was bad")
+            throw GroceryListError.BadEntity("The entity description was bad")
         }
         // TODO: Implement Me!
-        let obj = GroceryData(entity: entity, insertInto: ctx)
-        obj.listName = data.listName
-        obj.itemName = data.itemName
-        obj.itemQuantity = Int16(data.itemQuantity)
+        let obj = GroceryList(entity: entity, insertInto: ctx)
+        obj.groceryListName = groceryListName
         
         try? save()
     }
