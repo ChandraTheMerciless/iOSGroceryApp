@@ -30,7 +30,7 @@ class DataManager {
     }
     
     //if function has throw, wherever you use that func has to be wrapped in try
-    func create(data: (name: String?, age: Int, description: String?)) throws {
+    func create(data: (listName: String?, itemName: String?, itemQuantity: Int)) throws {
         guard let ctx = managedObjectContext else {
             throw DataError.BadManagedObjectContext("The managed object context was nil")
         }
@@ -40,9 +40,8 @@ class DataManager {
         // TODO: Implement Me!
         let obj = GroceryData(entity: entity, insertInto: ctx)
         obj.listName = data.listName
-        //we specified attribute in table as int16
-     //   obj.age = Int16(data.age)
-       // obj.dataDescription = data.description
+        obj.itemName = data.itemName
+        obj.itemQuantity = Int16(data.itemQuantity)
         
         try? save()
     }
