@@ -14,55 +14,103 @@ enum GroceryListError: Error {
     case BadEntity(String)
 }
 
+
 class GroceryListManager {
-    
     static var shared: GroceryListManager = GroceryListManager()
+    
     var managedObjectContext: NSManagedObjectContext?
     
-    var data: [GroceryList]
+    var groceryList: [GroceryList]
+    var groceryListCount: Int {
+        return groceryList.count
+    }
+    
+    var groceryData: [GroceryData]
+    var groceryDataCount: Int {
+        return groceryData.count
+    }
+    
+    var selectedGroceryListIndex: Int
+    var selectedGroceryDataIndex: Int
     
     private init() {
-        data = []
+        groceryList = []
+        groceryData = []
+        selectedGroceryListIndex = -1
+        selectedGroceryDataIndex = -1
+    }
+}
+
+
+extension GroceryListManager {
+    func loadGroceryList() {
+        groceryList = fetch()
     }
     
-    func set(managedObjectContext: NSManagedObjectContext) {
-        self.managedObjectContext = managedObjectContext
-        print("called on load?")
-        print(managedObjectContext)
-        print(data)
-        print("managed obj cont?")
-    }
-    
-    //if function has throw, wherever you use that func has to be wrapped in try
-    func create(groceryListName: (String?)) throws {
-        print(self.managedObjectContext)
-        print(managedObjectContext)
-        print("managed context?")
-        
+    func create(groceryListNamed groceryListName: String?) throws {
         guard let ctx = managedObjectContext else {
             throw GroceryListError.BadManagedObjectContext("The managed object context was nil")
         }
-        
-        print(NSEntityDescription.entity(forEntityName: "GroceryList", in: ctx))
-        
         guard let entity = NSEntityDescription.entity(forEntityName: "GroceryList", in: ctx) else {
             throw GroceryListError.BadEntity("The entity description was bad")
         }
-        // TODO: Implement Me!
+        print(ctx)
+        print(entity)
         let obj = GroceryList(entity: entity, insertInto: ctx)
         obj.groceryListName = groceryListName
-        
-        print("first")
-        print(GroceryList(entity: entity, insertInto: ctx))
-        print("second")
-        print(groceryListName)
-        print("third")
-        print(obj.groceryListName)
         
         try? save()
     }
     
-    //needs [weak self] (closure of captured list - needs to be weak because we don't want to capture self, we want to capture weak reference to it so it doesn't force function to run when we don't want it to
+    func getGroceryListName(from indexPath: IndexPath) -> String? {
+        return groceryList.value(at: indexPath.row)?.groceryListName
+    }
+}
+
+//Somehow, I have two separate variables called groceryData, and they don't seem to be interfering with each other yet?
+extension GroceryListManager {
+    // MARK: - Get / Create New MyData
+    func loadGroceryData() {
+        let selectedGroceryList = groceryList.value(at: selectedGroceryListIndex)
+        groceryData = selectedGroceryList?.groceryData?.flatMap { item in
+            return item as? GroceryData
+            } ?? []
+    }
+    
+    func create(data: (itemName: String?, itemQuantity: Int)) throws {
+        guard let ctx = managedObjectContext else {
+            throw GroceryListError.BadManagedObjectContext("The managed object context was nil")
+        }
+        guard let entity = NSEntityDescription.entity(forEntityName: "GroceryData", in: ctx) else {
+            throw GroceryListError.BadEntity("The entity description was bad")
+        }
+        let obj = GroceryData(entity: entity, insertInto: ctx)
+        obj.itemName = data.itemName
+        obj.itemQuantity = Int16(data.itemQuantity)
+        obj.list = groceryList.value(at: selectedGroceryListIndex)
+        
+        try? save()
+    }
+    
+    func getGroceryData(from indexPath: IndexPath) -> (itemName: String?, itemQuantity: Int)? {
+        guard let item = groceryData.value(at: indexPath.row) else {
+            return nil
+        }
+        return (item.itemName, Int(item.itemQuantity))
+    }
+    
+    func getSelectedGroceryData() -> (itemName: String?, itemQuantity: Int)? {
+        guard let item = groceryData.value(at: selectedGroceryDataIndex) else {
+            return nil
+        }
+        return (item.itemName, Int(item.itemQuantity))
+    }
+}
+
+
+extension GroceryListManager {
+    // MARK: - Fetching Data
+    
     func fetch<T: NSManagedObject>() -> [T] {
         var result: [T]? = nil
         managedObjectContext?.performAndWait { [weak self] in
@@ -73,7 +121,7 @@ class GroceryListManager {
                 print(error)
             }
         }
-        
+
         return result ?? []
     }
     
@@ -82,7 +130,9 @@ class GroceryListManager {
         return try request.execute() as? [T]
     }
     
-    func save()  throws {
+    func save() throws {
+        print("save called?")
+        print(managedObjectContext)
         try managedObjectContext?.save()
     }
 }

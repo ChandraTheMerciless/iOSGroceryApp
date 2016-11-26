@@ -15,8 +15,9 @@ extension GroceryData {
         return NSFetchRequest<GroceryData>(entityName: "GroceryData");
     }
     
-    @NSManaged public var listName: String?
     @NSManaged public var itemName: String?
     @NSManaged public var itemQuantity: Int16
+    
+    @NSManaged public var list: GroceryList?
     
 }

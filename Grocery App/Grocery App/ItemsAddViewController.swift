@@ -13,21 +13,10 @@ class ItemsAddViewController: UIViewController {
     @IBOutlet var itemName: UITextField?
     @IBOutlet var itemQuantiy: UITextField?
     
-    let dataManager = GroceryDataManager.shared
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    let groceryDataManager = GroceryListManager.shared
     
     @IBAction func addItem(){
-        try? dataManager.create(data: ("List Name", itemName?.text, itemQuantiy?.text?.integer ?? 0))
+        try? groceryDataManager.create(data: (itemName?.text, itemQuantiy?.text?.integer ?? 0))
         
         dismiss(animated: UIView.areAnimationsEnabled, completion: nil)
     }

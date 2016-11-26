@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //GroceryListManager.shared.set(managedObjectContext: persistentContainer.viewContext)
+        GroceryListManager.shared.managedObjectContext = persistentContainer.viewContext
         return true
     }
 

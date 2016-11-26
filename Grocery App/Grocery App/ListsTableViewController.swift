@@ -18,9 +18,9 @@ class ListsTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        manager.data = manager.fetch()
-        print("view did load working right?")
-        print(manager.data)
+        super.viewWillAppear(animated)
+        
+        manager.loadGroceryList()
         GroceryListView?.reloadData()
     }
 
@@ -32,17 +32,21 @@ class ListsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return manager.data.count
+        return manager.groceryListCount
     }
     
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as! GroceryListCell
         
-        cell.listName?.text = manager.data[indexPath.row].groceryListName
-        //cell.listItemNum?.text = manager.data[indexPath.row].groceryListName
-        //cell.listItemNum?.text = "\(manager.data[indexPath.row].groceryItem.count)" //string interpolation
+        cell.listName?.text = manager.getGroceryListName(from: indexPath)
         
         return cell
     }
-
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: UIView.areAnimationsEnabled)
+        
+        manager.selectedGroceryListIndex = indexPath.row
+    }
+    
 }

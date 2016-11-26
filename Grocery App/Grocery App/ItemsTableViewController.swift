@@ -11,38 +11,35 @@ import UIKit
 class ItemsTableViewController: UITableViewController {
 
     @IBOutlet var GroceryDataView: UITableView?
-    let manager = GroceryDataManager.shared
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    let manager = GroceryListManager.shared
     
     
-    /*override func viewWillAppear(_ animated: Bool) {
-        manager.data = manager.fetch()
-        print("view did load working right?")
-        print(manager.data)
-        GroceryListView?.reloadData()
-    }*/
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        manager.loadGroceryData()
+        
+        GroceryDataView?.reloadData()
     }
 
     // MARK: - Table view data source
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return manager.data.count
+        return manager.groceryDataCount
     }
     
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! GroceryDataCell
         
-        cell.itemName?.text = manager.data[indexPath.row].itemName
-        cell.itemQuantity?.text = "\(manager.data[indexPath.row].itemQuantity)"
+        let item = manager.getGroceryData(from: indexPath)
+        
+        cell.itemName?.text = item?.itemName
+        cell.itemQuantity?.text = "\(item?.itemQuantity)"
         
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: UIView.areAnimationsEnabled)
+        
+        manager.selectedGroceryDataIndex = indexPath.row
+    }
     
 }
