@@ -125,6 +125,7 @@ extension GroceryListManager {
         return result ?? []
     }
     
+    //through doing print logs, I figured out that this function results in a nil error
     private func executeFetchRequest<T: NSManagedObject>() throws -> [T]? {
         let request = T.fetchRequest()
         return try request.execute() as? [T]

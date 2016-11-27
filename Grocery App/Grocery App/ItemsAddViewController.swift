@@ -20,6 +20,10 @@ class ItemsAddViewController: UIViewController {
         
         dismiss(animated: UIView.areAnimationsEnabled, completion: nil)
     }
+    
+    @IBAction func cancelAddItem(){
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 //converts int obj to string obj

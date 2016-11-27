@@ -13,14 +13,17 @@ class ListsTableViewController: UITableViewController {
     @IBOutlet var GroceryListView: UITableView?
     let manager = GroceryListManager.shared
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //found that this function results in a nilError in print logs
         manager.loadGroceryList()
+        
         GroceryListView?.reloadData()
     }
 
