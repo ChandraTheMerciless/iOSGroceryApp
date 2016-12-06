@@ -1,14 +1,15 @@
 //
-//  GroceryListClass.swift
+//  GroceryData+CoreDataClass.swift
 //  Grocery App
 //
-//  Created by Asar, Chandra on 11/25/16.
+//  Created by Asar, Chandra on 12/5/16.
 //  Copyright © 2016 Asar, Chandra. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-class GroceryList: NSManagedObject {
+
+public class GroceryData: NSManagedObject {
 
 }

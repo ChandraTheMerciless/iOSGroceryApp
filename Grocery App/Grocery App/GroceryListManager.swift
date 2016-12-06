@@ -87,7 +87,7 @@ extension GroceryListManager {
         let obj = GroceryData(entity: entity, insertInto: ctx)
         obj.itemName = data.itemName
         obj.itemQuantity = Int16(data.itemQuantity)
-        obj.list = groceryList.value(at: selectedGroceryListIndex)
+        obj.groceryList = groceryList.value(at: selectedGroceryListIndex)
         
         try? save()
     }

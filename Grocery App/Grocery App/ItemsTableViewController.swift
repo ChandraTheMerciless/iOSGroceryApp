@@ -31,14 +31,13 @@ class ItemsTableViewController: UITableViewController {
         let item = manager.getGroceryData(from: indexPath)
         
         cell.itemName?.text = item?.itemName
-        cell.itemQuantity?.text = "\(item?.itemQuantity)"
+        cell.itemQuantity?.text = "Quantity: \(item?.itemQuantity ?? 0)"
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: UIView.areAnimationsEnabled)
-        
         manager.selectedGroceryDataIndex = indexPath.row
     }
     

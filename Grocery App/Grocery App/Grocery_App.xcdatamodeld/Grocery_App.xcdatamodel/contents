@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="15G31" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="GroceryData" representedClassName="" syncable="YES">
+    <entity name="GroceryData" representedClassName=".GroceryData" syncable="YES">
         <attribute name="itemName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="itemQuantity" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="groceryList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GroceryList" inverseName="groceryItemsData" inverseEntity="GroceryList" syncable="YES"/>
+        <relationship name="groceryList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GroceryList" inverseName="groceryData" inverseEntity="GroceryList" syncable="YES"/>
     </entity>
-    <entity name="GroceryList" representedClassName="GroceryList" syncable="YES">
+    <entity name="GroceryList" representedClassName=".GroceryList" syncable="YES">
         <attribute name="groceryListName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="groceryItemsData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GroceryData" inverseName="groceryList" inverseEntity="GroceryData" syncable="YES"/>
+        <relationship name="groceryData" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GroceryData" inverseName="groceryList" inverseEntity="GroceryData" syncable="YES"/>
     </entity>
     <elements>
         <element name="GroceryData" positionX="-45" positionY="0" width="128" height="90"/>

@@ -13,11 +13,6 @@ class ListsTableViewController: UITableViewController {
     @IBOutlet var GroceryListView: UITableView?
     let manager = GroceryListManager.shared
     
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -42,6 +37,7 @@ class ListsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as! GroceryListCell
         
         cell.listName?.text = manager.getGroceryListName(from: indexPath)
+        cell.listItemNum?.text = "\(manager.groceryDataCount ?? 0)"
         
         return cell
     }
