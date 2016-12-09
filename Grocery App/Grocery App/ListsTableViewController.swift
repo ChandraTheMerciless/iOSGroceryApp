@@ -8,6 +8,25 @@
 
 import UIKit
 
+protocol ListTableCellContainer {
+    var listName: UILabel! { get set }
+    var listItemNum: UILabel! { get set }
+    
+    func setListName(name: String?)
+    func setItemNum(itemNum: String?)
+}
+
+extension ListTableCellContainer {
+    
+    func setListName(name: String?) {
+        listName.text = name
+    }
+    
+    func setItemNum(itemNum: String?) {
+        listItemNum.text = itemNum
+    }
+}
+
 class ListsTableViewController: UITableViewController {
 
     @IBOutlet var GroceryListView: UITableView?
@@ -34,12 +53,12 @@ class ListsTableViewController: UITableViewController {
     }
     
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as! GroceryListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as! ListTableCellContainer
         
         cell.listName?.text = manager.getGroceryListName(from: indexPath)
         cell.listItemNum?.text = "\(manager.groceryDataCount ?? 0)"
         
-        return cell
+        return cell as! UITableViewCell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

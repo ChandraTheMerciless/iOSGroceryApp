@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GroceryListCell: UITableViewCell {
+class GroceryListCell: UITableViewCell, ListTableCellContainer {
 
     @IBOutlet var listName: UILabel!
     @IBOutlet var listItemNum: UILabel!
