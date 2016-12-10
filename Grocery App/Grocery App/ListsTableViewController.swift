@@ -30,7 +30,8 @@ extension ListTableCellContainer {
 class ListsTableViewController: UITableViewController {
 
     @IBOutlet var GroceryListView: UITableView?
-    let manager = GroceryListManager.shared
+    var manager: DataManager = GroceryListManager.shared
+    //let manager = GroceryListManager.shared
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

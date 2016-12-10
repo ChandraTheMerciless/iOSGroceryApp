@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GroceryDataCell: UITableViewCell {
+class GroceryDataCell: UITableViewCell, DataTableCellContainer {
 
     @IBOutlet var itemName: UILabel!
     @IBOutlet var itemQuantity: UILabel!

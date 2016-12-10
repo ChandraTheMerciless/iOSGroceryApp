@@ -12,7 +12,8 @@ class ListsAddViewController: UIViewController {
     
     @IBOutlet var listName: UITextField?
     
-    let manager = GroceryListManager.shared
+    //let manager = GroceryListManager.shared
+    var manager: DataManager = GroceryListManager.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()

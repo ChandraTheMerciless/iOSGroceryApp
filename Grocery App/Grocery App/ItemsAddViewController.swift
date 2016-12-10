@@ -13,10 +13,14 @@ class ItemsAddViewController: UIViewController {
     @IBOutlet var itemName: UITextField?
     @IBOutlet var itemQuantity: UITextField?
     
-    let groceryDataManager = GroceryListManager.shared
+    //let manager = GroceryListManager.shared
+    //NOTE: for some reason, this doesn't want to work
+    var manager: DataManager = GroceryListManager.shared
     
     @IBAction func addItem(){
-        try? groceryDataManager.create(data: (itemName?.text, itemQuantity?.text?.integer ?? 0))
+        try? manager.create(data: (itemName?.text, itemQuantity?.text?.integer ?? 0))
+        //create(data: (itemName: String?, itemQuantity: Int)
+        
         
         dismiss(animated: UIView.areAnimationsEnabled, completion: nil)
     }

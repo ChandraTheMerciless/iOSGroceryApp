@@ -8,11 +8,30 @@
 
 import UIKit
 
-class ItemsTableViewController: UITableViewController {
 
-    @IBOutlet var GroceryDataView: UITableView?
-    let manager = GroceryListManager.shared
+protocol DataTableCellContainer {
+    var itemName: UILabel! { get set }
+    var itemQuantity: UILabel! { get set }
     
+    func setListName(dataName: String?)
+    func setItemNum(dataItemNum: String?)
+}
+
+extension DataTableCellContainer {
+    
+    func setListName(dataName: String?) {
+        itemName.text = dataName
+    }
+    
+    func setItemNum(dataItemNum: String?) {
+        itemQuantity.text = dataItemNum
+    }
+}
+
+class ItemsTableViewController: UITableViewController {
+    
+    @IBOutlet var GroceryDataView: UITableView?
+    var manager: DataManager = GroceryListManager.shared
     
     override func viewWillAppear(_ animated: Bool) {
         manager.loadGroceryData()
@@ -26,14 +45,14 @@ class ItemsTableViewController: UITableViewController {
     }
     
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! GroceryDataCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! DataTableCellContainer
         
         let item = manager.getGroceryData(from: indexPath)
         
         cell.itemName?.text = item?.itemName
         cell.itemQuantity?.text = "Quantity: \(item?.itemQuantity ?? 0)"
         
-        return cell
+        return cell as! UITableViewCell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
