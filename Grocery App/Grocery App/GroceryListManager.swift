@@ -14,26 +14,6 @@ enum GroceryListError: Error {
     case BadEntity(String)
 }
 
-protocol DataManager {
-    var groceryList: [GroceryList] { get set }
-    var groceryListCount: Int  { get }
-    
-    var groceryData: [GroceryData] { get set }
-    var groceryDataCount: Int { get }
-    
-    var selectedGroceryListIndex: Int { get set }
-    var selectedGroceryDataIndex: Int{ get set }
-    
-    func loadGroceryList()
-    func loadGroceryData()
-    
-    func create(groceryListNamed groceryListName: String?) throws
-    func create(data: (itemName: String?, itemQuantity: Int)) throws
-    
-    func getGroceryListName(from indexPath: IndexPath) -> String?
-    func getGroceryData(from indexPath: IndexPath) -> (itemName: String?, itemQuantity: Int)?
-}
-
 class GroceryListManager: DataManager {
     static var shared: GroceryListManager = GroceryListManager()
     
@@ -73,12 +53,26 @@ extension GroceryListManager {
         guard let entity = NSEntityDescription.entity(forEntityName: "GroceryList", in: ctx) else {
             throw GroceryListError.BadEntity("The entity description was bad")
         }
-        print(ctx)
-        print(entity)
+        
         let obj = GroceryList(entity: entity, insertInto: ctx)
         obj.groceryListName = groceryListName
         
         try? save()
+    }
+    
+    func delete(groceryListNamed groceryListName: String?) throws {
+        guard let ctx = managedObjectContext else {
+            throw GroceryListError.BadManagedObjectContext("The managed object context was nil")
+        }
+        guard let entity = NSEntityDescription.entity(forEntityName: "GroceryList", in: ctx) else {
+            throw GroceryListError.BadEntity("The entity description was bad")
+        }
+        
+        let obj = GroceryList(entity: entity, insertInto: ctx)
+        obj.groceryListName = groceryListName
+        
+        //breaking my build, so commented out for now
+        //try? delete(obj: AnyObject)
     }
     
     func getGroceryListName(from indexPath: IndexPath) -> String? {
@@ -86,9 +80,7 @@ extension GroceryListManager {
     }
 }
 
-//Somehow, I have two separate variables called groceryData, and they don't seem to be interfering with each other yet?
 extension GroceryListManager {
-    // MARK: - Get / Create New MyData
     func loadGroceryData() {
         let selectedGroceryList = groceryList.value(at: selectedGroceryListIndex)
         groceryData = selectedGroceryList?.groceryData?.flatMap { item in
@@ -144,15 +136,17 @@ extension GroceryListManager {
         return result ?? []
     }
     
-    //through doing print logs, I figured out that this function results in a nil error
     private func executeFetchRequest<T: NSManagedObject>() throws -> [T]? {
         let request = T.fetchRequest()
         return try request.execute() as? [T]
     }
     
     func save() throws {
-        print("save called?")
-        print(managedObjectContext)
         try managedObjectContext?.save()
+    }
+    
+    func delete(obj: AnyObject) throws {
+        //So far, this is breaking my build, so commented out for now
+        //try managedObjectContext?.deleteObject(obj[IndexPath.row] as! NSManagedObject)
     }
 }

@@ -20,6 +20,8 @@
 		5B8D5B281DE7C3A90061B3EC /* ItemsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8D5B271DE7C3A90061B3EC /* ItemsTableViewController.swift */; };
 		5B8D5B2A1DE7C3FD0061B3EC /* ItemsAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8D5B291DE7C3FD0061B3EC /* ItemsAddViewController.swift */; };
 		5B8D5B2C1DE7C4710061B3EC /* ListsAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8D5B2B1DE7C4710061B3EC /* ListsAddViewController.swift */; };
+		5B8DE6AF1DFC8558003DA416 /* DataManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8DE6AE1DFC8558003DA416 /* DataManagerProtocols.swift */; };
+		5B8DE6B11DFC8596003DA416 /* TableCellProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8DE6B01DFC8596003DA416 /* TableCellProtocols.swift */; };
 		5B99F48A1DE8AB59008CAB43 /* GroceryListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B99F4891DE8AB59008CAB43 /* GroceryListManager.swift */; };
 		5B99F48D1DE8B6A3008CAB43 /* GroceryListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B99F48C1DE8B6A3008CAB43 /* GroceryListCell.swift */; };
 		5BAD416A1DE8F43D001BAF3F /* GroceryDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BAD41691DE8F43D001BAF3F /* GroceryDataCell.swift */; };
@@ -42,6 +44,8 @@
 		5B8D5B271DE7C3A90061B3EC /* ItemsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsTableViewController.swift; sourceTree = "<group>"; };
 		5B8D5B291DE7C3FD0061B3EC /* ItemsAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsAddViewController.swift; sourceTree = "<group>"; };
 		5B8D5B2B1DE7C4710061B3EC /* ListsAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListsAddViewController.swift; sourceTree = "<group>"; };
+		5B8DE6AE1DFC8558003DA416 /* DataManagerProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerProtocols.swift; sourceTree = "<group>"; };
+		5B8DE6B01DFC8596003DA416 /* TableCellProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableCellProtocols.swift; sourceTree = "<group>"; };
 		5B99F4891DE8AB59008CAB43 /* GroceryListManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListManager.swift; sourceTree = "<group>"; };
 		5B99F48C1DE8B6A3008CAB43 /* GroceryListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryListCell.swift; sourceTree = "<group>"; };
 		5BAD41691DE8F43D001BAF3F /* GroceryDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroceryDataCell.swift; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 		5B8D5B0D1DE7B6740061B3EC /* Grocery App */ = {
 			isa = PBXGroup;
 			children = (
+				5B8DE6AD1DFC853E003DA416 /* Interfaces */,
 				5BAD416B1DEA0A4E001BAF3F /* Extensions */,
 				5B99F48B1DE8B672008CAB43 /* TableCells */,
 				5B8D5B241DE7B73F0061B3EC /* Data */,
@@ -113,6 +118,15 @@
 				5B99F4891DE8AB59008CAB43 /* GroceryListManager.swift */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		5B8DE6AD1DFC853E003DA416 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				5B8DE6AE1DFC8558003DA416 /* DataManagerProtocols.swift */,
+				5B8DE6B01DFC8596003DA416 /* TableCellProtocols.swift */,
+			);
+			name = Interfaces;
 			sourceTree = "<group>";
 		};
 		5B99F48B1DE8B672008CAB43 /* TableCells */ = {
@@ -204,8 +218,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B8DE6B11DFC8596003DA416 /* TableCellProtocols.swift in Sources */,
 				5B8D5B171DE7B6740061B3EC /* Grocery_App.xcdatamodeld in Sources */,
 				5B8D5B281DE7C3A90061B3EC /* ItemsTableViewController.swift in Sources */,
+				5B8DE6AF1DFC8558003DA416 /* DataManagerProtocols.swift in Sources */,
 				5B8D5B2C1DE7C4710061B3EC /* ListsAddViewController.swift in Sources */,
 				5B3BB4AF1DF6401100F8E77E /* GroceryList+CoreDataProperties.swift in Sources */,
 				5B8D5B2A1DE7C3FD0061B3EC /* ItemsAddViewController.swift in Sources */,

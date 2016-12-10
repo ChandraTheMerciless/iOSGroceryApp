@@ -8,26 +8,6 @@
 
 import UIKit
 
-
-protocol DataTableCellContainer {
-    var itemName: UILabel! { get set }
-    var itemQuantity: UILabel! { get set }
-    
-    func setListName(dataName: String?)
-    func setItemNum(dataItemNum: String?)
-}
-
-extension DataTableCellContainer {
-    
-    func setListName(dataName: String?) {
-        itemName.text = dataName
-    }
-    
-    func setItemNum(dataItemNum: String?) {
-        itemQuantity.text = dataItemNum
-    }
-}
-
 class ItemsTableViewController: UITableViewController {
     
     @IBOutlet var GroceryDataView: UITableView?
