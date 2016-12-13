@@ -27,3 +27,22 @@ protocol DataManager {
     func getGroceryListName(from indexPath: IndexPath) -> String?
     func getGroceryData(from indexPath: IndexPath) -> (itemName: String?, itemQuantity: Int)?
 }
+
+//MARK: break above protocol into traits
+//NOTE: Below traits are too broad, since they should be as small as possible - break inits and edit down into smaller, more specific traits
+
+protocol groceryListInit {
+    
+}
+
+protocol groceryDataInit {
+    
+}
+
+protocol groceryListEdit {
+    
+}
+
+protocol grceryDataEdit {
+    
+}

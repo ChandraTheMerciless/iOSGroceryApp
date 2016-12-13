@@ -14,19 +14,13 @@ class ListsAddViewController: UIViewController {
     
     //let manager = GroceryListManager.shared
     var manager: DataManager = GroceryListManager.shared
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-        view.endEditing(true);
-        super.touchesBegan(touches, with: event);
-        
-        listName!.resignFirstResponder();
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+//        view.endEditing(true);
+//        super.touchesBegan(touches, with: event);
+//        
+//        listName!.resignFirstResponder();
+//    }
     
     @IBAction func addListName(){
         try? manager.create(groceryListNamed: listName?.text)

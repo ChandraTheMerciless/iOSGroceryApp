@@ -12,6 +12,10 @@ class ListsTableViewController: UITableViewController {
 
     @IBOutlet var GroceryListView: UITableView?
     var manager: DataManager = GroceryListManager.shared
+    
+    //MARK: This is how to compose two or more traits together if you need to use more than one in another class
+    //var manager2: (groceryListInits & groceryDataInits)?
+    
     //let manager = GroceryListManager.shared
     
     override func viewWillAppear(_ animated: Bool) {
@@ -23,11 +27,6 @@ class ListsTableViewController: UITableViewController {
         GroceryListView?.reloadData()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Table view data source
 
     override public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -37,14 +36,10 @@ class ListsTableViewController: UITableViewController {
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as! ListTableCellContainer
         
-        let itemCollection = manager.getGroceryData(from: indexPath)
-        
-        print(itemCollection)
-        
-        manager.loadGroceryData()
+        let dataCount = manager.groceryList[indexPath.row].groceryData?.count
         
         cell.listName?.text = manager.getGroceryListName(from: indexPath)
-        cell.listItemNum?.text = "\(manager.groceryDataCount ?? 0)"
+        cell.listItemNum?.text = "\(dataCount ?? 0)"
         
         return cell as! UITableViewCell
     }
@@ -54,8 +49,6 @@ class ListsTableViewController: UITableViewController {
         
         manager.selectedGroceryListIndex = indexPath.row
     }
- 
-
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true;

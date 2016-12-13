@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gvW-vf-7zR" id="Cfn-9f-gbb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="List Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqR-yL-JEg">
@@ -118,6 +118,7 @@
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="VEg-vL-qZA" firstAttribute="trailing" secondItem="8Qq-cu-nyt" secondAttribute="trailingMargin" id="1Vv-Oc-sFY"/>
                             <constraint firstItem="MEk-g1-DYo" firstAttribute="leading" secondItem="8Qq-cu-nyt" secondAttribute="leading" constant="16" id="CGI-3h-crv"/>
@@ -133,12 +134,20 @@
                             <constraint firstItem="Tv1-aT-QPh" firstAttribute="width" secondItem="MEk-g1-DYo" secondAttribute="width" id="ug0-uf-Kxu"/>
                             <constraint firstItem="VEg-vL-qZA" firstAttribute="top" secondItem="pXX-IQ-SDM" secondAttribute="bottom" constant="24" id="wc4-g3-NLN"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="a1k-hh-ZnD" appends="YES" id="Ahg-EP-8O5"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="listName" destination="VEg-vL-qZA" id="d7Q-dJ-nUa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aa8-Bx-sAP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="a1k-hh-ZnD">
+                    <connections>
+                        <action selector="dismissKeyboard" destination="kfe-Hg-2dk" id="nHs-1G-74q"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1407.2" y="1578.2608695652175"/>
         </scene>
@@ -200,6 +209,7 @@
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="aaL-NF-4QH" firstAttribute="centerX" secondItem="tqY-jK-p9w" secondAttribute="centerX" id="0au-aP-vwe"/>
                             <constraint firstItem="gDV-z5-X4U" firstAttribute="leading" secondItem="tqY-jK-p9w" secondAttribute="leading" constant="15" id="6nj-Lf-vvQ"/>
@@ -216,6 +226,9 @@
                             <constraint firstItem="ZPs-pV-qU0" firstAttribute="leading" secondItem="gDV-z5-X4U" secondAttribute="trailing" constant="15" id="oOF-ka-fjc"/>
                             <constraint firstItem="aaL-NF-4QH" firstAttribute="top" secondItem="zbY-qd-O29" secondAttribute="bottom" constant="8" id="sGY-HV-Wrl"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="1Zh-Ac-ScA" appends="YES" id="1Kk-4J-Q3V"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="itemName" destination="Njv-Jg-wEN" id="bGO-SG-MIb"/>
@@ -223,6 +236,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gJj-dK-M67" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="1Zh-Ac-ScA">
+                    <connections>
+                        <action selector="dismissKeyboard" destination="Edz-rc-e7B" id="Ho8-fp-kFa"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2548" y="1577"/>
         </scene>
@@ -239,7 +257,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qgN-Ij-ANQ" id="byk-wA-et2">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="item Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OjU-2V-maH">

@@ -25,13 +25,13 @@ class ItemsAddViewController: UIViewController {
         dismiss(animated: UIView.areAnimationsEnabled, completion: nil)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-        view.endEditing(true);
-        super.touchesBegan(touches, with: event);
-        
-        itemName!.resignFirstResponder();
-        itemQuantity!.resignFirstResponder();
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+//        view.endEditing(true);
+//        super.touchesBegan(touches, with: event);
+//        
+//        itemName!.resignFirstResponder();
+//        itemQuantity!.resignFirstResponder();
+//    }
     
     @IBAction func cancelAddItem(){
         navigationController?.popViewController(animated: true)
