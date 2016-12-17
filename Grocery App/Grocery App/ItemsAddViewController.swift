@@ -13,9 +13,7 @@ class ItemsAddViewController: UIViewController {
     @IBOutlet var itemName: UITextField?
     @IBOutlet var itemQuantity: UITextField?
     
-    //let manager = GroceryListManager.shared
-    //NOTE: for some reason, this doesn't want to work
-    var manager: DataManager = GroceryListManager.shared
+    var manager: GroceryCreateData = GroceryListManager.shared
     
     @IBAction func addItem(){
         try? manager.create(data: (itemName?.text, itemQuantity?.text?.integer ?? 0))
@@ -25,17 +23,9 @@ class ItemsAddViewController: UIViewController {
         dismiss(animated: UIView.areAnimationsEnabled, completion: nil)
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-//        view.endEditing(true);
-//        super.touchesBegan(touches, with: event);
-//        
-//        itemName!.resignFirstResponder();
-//        itemQuantity!.resignFirstResponder();
+//    @IBAction func cancelAddItem(){
+//        navigationController?.popViewController(animated: true)
 //    }
-    
-    @IBAction func cancelAddItem(){
-        navigationController?.popViewController(animated: true)
-    }
 }
 
 //converts int obj to string obj

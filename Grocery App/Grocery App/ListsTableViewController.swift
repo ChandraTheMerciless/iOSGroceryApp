@@ -11,19 +11,13 @@ import UIKit
 class ListsTableViewController: UITableViewController {
 
     @IBOutlet var GroceryListView: UITableView?
-    var manager: DataManager = GroceryListManager.shared
     
-    //MARK: This is how to compose two or more traits together if you need to use more than one in another class
-    //var manager2: (groceryListInits & groceryDataInits)?
-    
-    //let manager = GroceryListManager.shared
+    var manager: (GroceryGetList & GroceryInterpretListProps) = GroceryListManager.shared
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //found that this function results in a nilError in print logs
         manager.loadGroceryList()
-        
         GroceryListView?.reloadData()
     }
 

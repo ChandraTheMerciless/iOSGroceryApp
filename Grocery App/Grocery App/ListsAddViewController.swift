@@ -12,15 +12,7 @@ class ListsAddViewController: UIViewController {
     
     @IBOutlet var listName: UITextField?
     
-    //let manager = GroceryListManager.shared
-    var manager: DataManager = GroceryListManager.shared
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-//        view.endEditing(true);
-//        super.touchesBegan(touches, with: event);
-//        
-//        listName!.resignFirstResponder();
-//    }
+    var manager: GroceryCreateList = GroceryListManager.shared
     
     @IBAction func addListName(){
         try? manager.create(groceryListNamed: listName?.text)
@@ -28,7 +20,7 @@ class ListsAddViewController: UIViewController {
         dismiss(animated: UIView.areAnimationsEnabled, completion: nil)
     }
     
-    @IBAction func cancelAddListName(){
-        navigationController?.popViewController(animated: true)
-    }
+//    @IBAction func cancelAddListName(){
+//        navigationController?.popViewController(animated: true)
+//    }
 }

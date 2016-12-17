@@ -14,7 +14,7 @@ enum GroceryListError: Error {
     case BadEntity(String)
 }
 
-class GroceryListManager: DataManager {
+class GroceryListManager: GroceryGetList, GroceryGetData, GroceryCreateList, GroceryCreateData, GroceryInterpretListProps, GroceryInterpretDataProps {
     static var shared: GroceryListManager = GroceryListManager()
     
     var managedObjectContext: NSManagedObjectContext?

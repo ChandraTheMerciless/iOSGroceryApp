@@ -8,41 +8,43 @@
 
 import Foundation
 
-protocol DataManager {
-    var groceryList: [GroceryList] { get set }
-    var groceryListCount: Int  { get }
-    
-    var groceryData: [GroceryData] { get set }
-    var groceryDataCount: Int { get }
-    
-    var selectedGroceryListIndex: Int { get set }
-    var selectedGroceryDataIndex: Int{ get set }
-    
-    func loadGroceryList()
-    func loadGroceryData()
-    
-    func create(groceryListNamed groceryListName: String?) throws
-    func create(data: (itemName: String?, itemQuantity: Int)) throws
-    
-    func getGroceryListName(from indexPath: IndexPath) -> String?
-    func getGroceryData(from indexPath: IndexPath) -> (itemName: String?, itemQuantity: Int)?
-}
-
 //MARK: break above protocol into traits
 //NOTE: Below traits are too broad, since they should be as small as possible - break inits and edit down into smaller, more specific traits
 
-protocol groceryListInit {
+protocol GroceryGetList {
+    var groceryList: [GroceryList] { get set }
+    func loadGroceryList()
+}
+
+protocol GroceryGetData {
+    var groceryData: [GroceryData] { get set }
+    func loadGroceryData()
+}
+
+protocol GroceryInterpretListProps {
+    var groceryListCount: Int  { get }
+    var selectedGroceryListIndex: Int { get set }
+    func getGroceryListName(from indexPath: IndexPath) -> String?
+}
+
+protocol GroceryInterpretDataProps {
+    var groceryDataCount: Int { get }
+    var selectedGroceryDataIndex: Int { get set }
+    func getGroceryData(from indexPath: IndexPath) -> (itemName: String?, itemQuantity: Int)?
+}
+
+protocol GroceryCreateList {
+    func create(groceryListNamed groceryListName: String?) throws
+}
+
+protocol GroceryCreateData{
+    func create(data: (itemName: String?, itemQuantity: Int)) throws
+}
+
+protocol GroceryEditList {
     
 }
 
-protocol groceryDataInit {
-    
-}
-
-protocol groceryListEdit {
-    
-}
-
-protocol grceryDataEdit {
+protocol GorceryEditData {
     
 }

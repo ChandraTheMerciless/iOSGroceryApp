@@ -13,8 +13,18 @@ protocol DismissableKeyboard {
     func dismissKeyboard()
 }
 
+protocol DismissableView {
+    func dismissView()
+}
+
 extension UIViewController: DismissableKeyboard {
     @IBAction func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+extension UIViewController: DismissableView {
+    @IBAction func dismissView() {
+        navigationController?.popViewController(animated: true)
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 class ItemsTableViewController: UITableViewController {
     
     @IBOutlet var GroceryDataView: UITableView?
-    var manager: DataManager = GroceryListManager.shared
+    var manager: (GroceryGetData & GroceryInterpretDataProps) = GroceryListManager.shared
     
     override func viewWillAppear(_ animated: Bool) {
         manager.loadGroceryData()
