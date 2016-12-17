@@ -42,7 +42,7 @@ protocol GroceryCreateData{
 }
 
 protocol GroceryEditList {
-    
+    func remove(groceryListNamed groceryListName: String?) throws
 }
 
 protocol GorceryEditData {

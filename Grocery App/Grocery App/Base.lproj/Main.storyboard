@@ -172,7 +172,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDV-z5-X4U">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDV-z5-X4U">
                                 <rect key="frame" x="15" y="561" width="164.5" height="30"/>
                                 <color key="backgroundColor" red="0.89411765340000005" green="0.52916671780000002" blue="0.60002455789999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Cancel">
@@ -182,8 +182,8 @@
                                     <action selector="dismissView" destination="Edz-rc-e7B" eventType="touchUpInside" id="dj0-ef-LdN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPs-pV-qU0">
-                                <rect key="frame" x="194" y="561" width="164.5" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPs-pV-qU0">
+                                <rect key="frame" x="194.5" y="561" width="164.5" height="30"/>
                                 <color key="backgroundColor" red="0.41568627949999998" green="0.62352943419999995" blue="0.70980393890000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Add">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -212,6 +212,7 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="aaL-NF-4QH" firstAttribute="centerX" secondItem="tqY-jK-p9w" secondAttribute="centerX" id="0au-aP-vwe"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZPs-pV-qU0" secondAttribute="trailing" id="4PT-Ux-Pc0"/>
                             <constraint firstItem="gDV-z5-X4U" firstAttribute="leading" secondItem="tqY-jK-p9w" secondAttribute="leading" constant="15" id="6nj-Lf-vvQ"/>
                             <constraint firstItem="f0b-4o-Qwn" firstAttribute="top" secondItem="Njv-Jg-wEN" secondAttribute="bottom" constant="16" id="9va-69-6N9"/>
                             <constraint firstItem="Njv-Jg-wEN" firstAttribute="top" secondItem="aaL-NF-4QH" secondAttribute="bottom" constant="24" id="GhE-qz-Jtr"/>

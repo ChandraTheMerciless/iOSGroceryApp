@@ -12,7 +12,7 @@ class ListsTableViewController: UITableViewController {
 
     @IBOutlet var GroceryListView: UITableView?
     
-    var manager: (GroceryGetList & GroceryInterpretListProps) = GroceryListManager.shared
+    var manager: (GroceryGetList & GroceryInterpretListProps & GroceryEditList) = GroceryListManager.shared
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -50,10 +50,11 @@ class ListsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            var list = manager.getGroceryListName(from: indexPath);
+            var listName = manager.getGroceryListName(from: indexPath);
             
             //handle delete stuff here
             manager.groceryList.remove(at: indexPath.row)
+            try? manager.remove(groceryListNamed: listName)
             
             GroceryListView?.reloadData()
         }

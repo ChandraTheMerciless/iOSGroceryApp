@@ -19,8 +19,4 @@ class ListsAddViewController: UIViewController {
         
         dismiss(animated: UIView.areAnimationsEnabled, completion: nil)
     }
-    
-//    @IBAction func cancelAddListName(){
-//        navigationController?.popViewController(animated: true)
-//    }
 }

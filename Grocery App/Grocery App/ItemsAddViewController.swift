@@ -17,15 +17,9 @@ class ItemsAddViewController: UIViewController {
     
     @IBAction func addItem(){
         try? manager.create(data: (itemName?.text, itemQuantity?.text?.integer ?? 0))
-        //create(data: (itemName: String?, itemQuantity: Int)
-        
         
         dismiss(animated: UIView.areAnimationsEnabled, completion: nil)
     }
-    
-//    @IBAction func cancelAddItem(){
-//        navigationController?.popViewController(animated: true)
-//    }
 }
 
 //converts int obj to string obj

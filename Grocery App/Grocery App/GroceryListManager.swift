@@ -14,7 +14,7 @@ enum GroceryListError: Error {
     case BadEntity(String)
 }
 
-class GroceryListManager: GroceryGetList, GroceryGetData, GroceryCreateList, GroceryCreateData, GroceryInterpretListProps, GroceryInterpretDataProps {
+class GroceryListManager: GroceryGetList, GroceryGetData, GroceryCreateList, GroceryCreateData, GroceryInterpretListProps, GroceryInterpretDataProps, GroceryEditList {
     static var shared: GroceryListManager = GroceryListManager()
     
     var managedObjectContext: NSManagedObjectContext?
@@ -60,19 +60,23 @@ extension GroceryListManager {
         try? save()
     }
     
-    func delete(groceryListNamed groceryListName: String?) throws {
+    func remove(groceryListNamed groceryListName: String?) throws {
         guard let ctx = managedObjectContext else {
             throw GroceryListError.BadManagedObjectContext("The managed object context was nil")
         }
-        guard let entity = NSEntityDescription.entity(forEntityName: "GroceryList", in: ctx) else {
-            throw GroceryListError.BadEntity("The entity description was bad")
+
+        //MARK: The larger block returned an error of "cannot call value of non-function type"
+        let list = groceryList.first
+//        let list = groceryList.first { list in
+//            return list.name == groceryListName
+//        }
+        if let listToBeDeleted = list {
+            print("delete?");
+            
+            ctx.delete(list!)
         }
         
-        let obj = GroceryList(entity: entity, insertInto: ctx)
-        obj.groceryListName = groceryListName
-        
-        //breaking my build, so commented out for now
-        //try? delete(obj: AnyObject)
+        try? save()
     }
     
     func getGroceryListName(from indexPath: IndexPath) -> String? {
@@ -143,10 +147,5 @@ extension GroceryListManager {
     
     func save() throws {
         try managedObjectContext?.save()
-    }
-    
-    func delete(obj: AnyObject) throws {
-        //So far, this is breaking my build, so commented out for now
-        //try managedObjectContext?.deleteObject(obj[IndexPath.row] as! NSManagedObject)
     }
 }
