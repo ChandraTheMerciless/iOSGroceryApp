@@ -12,7 +12,7 @@ class ListsTableViewController: UITableViewController {
 
     @IBOutlet var GroceryListView: UITableView?
     
-    var manager: (GroceryGetList & GroceryInterpretListProps & GroceryEditList) = GroceryListManager.shared
+    var manager: (GroceryGetList & GroceryEditList) = GroceryListManager.shared
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,15 +27,17 @@ class ListsTableViewController: UITableViewController {
         return manager.groceryListCount
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let listCell = cell as? ListTableCellContainer {
+            let dataCount = manager.groceryList[indexPath.row].groceryData?.count
+        
+            listCell.listName?.text = manager.getGroceryListName(from: indexPath)
+            listCell.listItemNum?.text = "\(dataCount ?? 0)"
+        }
+    }
+    
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as! ListTableCellContainer
-        
-        let dataCount = manager.groceryList[indexPath.row].groceryData?.count
-        
-        cell.listName?.text = manager.getGroceryListName(from: indexPath)
-        cell.listItemNum?.text = "\(dataCount ?? 0)"
-        
-        return cell as! UITableViewCell
+        return tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -50,11 +52,11 @@ class ListsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.delete) {
-            var listName = manager.getGroceryListName(from: indexPath);
+            let listName = manager.getGroceryListName(from: indexPath);
             
             //handle delete stuff here
-            manager.groceryList.remove(at: indexPath.row)
             try? manager.remove(groceryListNamed: listName)
+            manager.groceryList.remove(at: indexPath.row)
             
             GroceryListView?.reloadData()
         }

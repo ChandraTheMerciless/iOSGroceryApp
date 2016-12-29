@@ -12,9 +12,6 @@ import UIKit
 protocol ListTableCellContainer {
     var listName: UILabel! { get set }
     var listItemNum: UILabel! { get set }
-    
-    func setListName(name: String?)
-    func setItemNum(itemNum: String?)
 }
 
 extension ListTableCellContainer {
@@ -30,9 +27,6 @@ extension ListTableCellContainer {
 protocol DataTableCellContainer {
     var itemName: UILabel! { get set }
     var itemQuantity: UILabel! { get set }
-    
-    func setListName(dataName: String?)
-    func setItemNum(dataItemNum: String?)
 }
 
 extension DataTableCellContainer {

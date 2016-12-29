@@ -11,7 +11,8 @@ import UIKit
 class ItemsTableViewController: UITableViewController {
     
     @IBOutlet var GroceryDataView: UITableView?
-    var manager: (GroceryGetData & GroceryInterpretDataProps) = GroceryListManager.shared
+    var manager: (GroceryGetData & GroceryEditData) = GroceryListManager.shared
+
     
     override func viewWillAppear(_ animated: Bool) {
         manager.loadGroceryData()
@@ -24,15 +25,17 @@ class ItemsTableViewController: UITableViewController {
         return manager.groceryDataCount
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if let itemCell = cell as? DataTableCellContainer {
+            let item = manager.getGroceryData(from: indexPath)
+            
+            itemCell.itemName?.text = item?.itemName
+            itemCell.itemQuantity?.text = "Quantity: \(item?.itemQuantity ?? 0)"
+        }
+    }
+    
     override public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath) as! DataTableCellContainer
-        
-        let item = manager.getGroceryData(from: indexPath)
-        
-        cell.itemName?.text = item?.itemName
-        cell.itemQuantity?.text = "Quantity: \(item?.itemQuantity ?? 0)"
-        
-        return cell as! UITableViewCell
+        return tableView.dequeueReusableCell(withIdentifier: "ItemCell", for: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -40,4 +43,20 @@ class ItemsTableViewController: UITableViewController {
         manager.selectedGroceryDataIndex = indexPath.row
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true;
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.delete) {
+            let dataRow = manager.getGroceryData(from: indexPath);
+            
+            //handle delete stuff here
+            
+            try? manager.remove(data: (dataRow?.itemName, (dataRow?.itemQuantity)! as Int))
+            manager.groceryList.remove(at: indexPath.row)
+            
+            GroceryDataView?.reloadData()
+        }
+    }
 }
