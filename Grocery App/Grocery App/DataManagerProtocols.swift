@@ -139,6 +139,11 @@ extension GroceryEditList {
         }
         
         //MARK: The larger block returned an error of "cannot call value of non-function type"
+//        let list = groceryList.first { list in
+//            return list.name == groceryListName
+//        }
+        
+        
         let list = groceryList.first
         
         if let listToBeDeleted = list {

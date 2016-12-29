@@ -55,8 +55,8 @@ class ListsTableViewController: UITableViewController {
             let listName = manager.getGroceryListName(from: indexPath);
             
             //handle delete stuff here
-            try? manager.remove(groceryListNamed: listName)
             manager.groceryList.remove(at: indexPath.row)
+            try? manager.remove(groceryListNamed: listName)
             
             GroceryListView?.reloadData()
         }
