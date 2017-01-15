@@ -58,6 +58,8 @@ class ListsTableViewController: UITableViewController {
             manager.groceryList.remove(at: indexPath.row)
             try? manager.remove(groceryListNamed: listName)
             
+            
+            
             GroceryListView?.reloadData()
         }
     }

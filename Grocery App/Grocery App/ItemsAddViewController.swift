@@ -19,6 +19,7 @@ class ItemsAddViewController: UIViewController {
         try? manager.create(data: (itemName?.text, itemQuantity?.text?.integer ?? 0))
         
         dismiss(animated: UIView.areAnimationsEnabled, completion: nil)
+        dismissView()
     }
 }
 

@@ -18,5 +18,6 @@ class ListsAddViewController: UIViewController {
         try? manager.create(groceryListNamed: listName?.text)
         
         dismiss(animated: UIView.areAnimationsEnabled, completion: nil)
+        dismissView()
     }
 }
