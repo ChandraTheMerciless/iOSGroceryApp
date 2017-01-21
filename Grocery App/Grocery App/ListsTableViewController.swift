@@ -12,7 +12,7 @@ class ListsTableViewController: UITableViewController {
 
     @IBOutlet var GroceryListView: UITableView?
     
-    var manager: (GroceryGetList & GroceryEditList) = GroceryListManager.shared
+    var manager: (GenericListVariables & GroceryGetList) = GroceryListManager.shared
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -32,7 +32,7 @@ class ListsTableViewController: UITableViewController {
             let dataCount = manager.groceryList[indexPath.row].groceryData?.count
         
             listCell.listName?.text = manager.getGroceryListName(from: indexPath)
-            listCell.listItemNum?.text = "\(dataCount ?? 0)"
+            listCell.listItemNum?.text = "\(dataCount ?? 0) Items"
         }
     }
     
@@ -48,19 +48,5 @@ class ListsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true;
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            let listName = manager.getGroceryListName(from: indexPath);
-            
-            //handle delete stuff here
-            manager.groceryList.remove(at: indexPath.row)
-            try? manager.remove(groceryListNamed: listName)
-            
-            
-            
-            GroceryListView?.reloadData()
-        }
     }
 }

@@ -9,16 +9,27 @@
 import Foundation
 import CoreData
 
+// MARK Protocols with generic variables and functions
+protocol GenericListVariables {
+    var groceryList: [GroceryList] { get set }
+    var selectedGroceryListIndex: Int { get set }
+}
+
+protocol GenericSaveVariables {
+    var managedObjectContext: NSManagedObjectContext? { get set }
+    
+    func save() throws
+}
+
+// MARK Protocols that are more specific to certain jobs
 protocol GroceryGetList {
-    var groceryList: [GroceryList] { get set } // NOTE - declared in multiple protocols
     var groceryListCount: Int  { get }
-    var selectedGroceryListIndex: Int { get set } // NOTE - declared in multiple protocols
     
     func getGroceryListName(from indexPath: IndexPath) -> String?
     func fetch<T: NSManagedObject>() -> [T]
 }
 
-extension GroceryGetList {
+extension GroceryGetList where Self: GenericListVariables {
     mutating func loadGroceryList() {
         groceryList = fetch()
     }
@@ -29,20 +40,16 @@ extension GroceryGetList {
 }
 
 
-
-//NOTE - since this depends on variables from list and data, restructure?
 protocol GroceryGetData {
-    var groceryData: [GroceryData] { get set } // NOTE - declared in multiple protocols
-    var groceryList: [GroceryList] { get set } // NOTE - declared in multiple protocols
+    var groceryData: [GroceryData] { get set }
     var groceryDataCount: Int { get }
-    var selectedGroceryListIndex: Int { get set } // NOTE - declared in multiple protocols
     var selectedGroceryDataIndex: Int { get set }
     
     func getGroceryData(from indexPath: IndexPath) -> (itemName: String?, itemQuantity: Int)?
 }
 
 
-extension GroceryGetData {
+extension GroceryGetData where Self: GenericListVariables {
     func getGroceryData(from indexPath: IndexPath) -> (itemName: String?, itemQuantity: Int)? {
         guard let item = groceryData.value(at: indexPath.row) else {
             return nil
@@ -66,18 +73,11 @@ extension GroceryGetData {
 }
 
 
-
-
-
 protocol GroceryCreateList {
-    var managedObjectContext: NSManagedObjectContext? { get set } //NOTE common - put in generic protocol for others to rely on?
-    
-    func save() throws // NOTE declared in multiple protocols
-    
     func create(groceryListNamed groceryListName: String?) throws
 }
 
-extension GroceryCreateList {
+extension GroceryCreateList where Self: GenericSaveVariables {
     func create(groceryListNamed groceryListName: String?) throws {
         guard let ctx = managedObjectContext else {
             throw GroceryListError.BadManagedObjectContext("The managed object context was nil")
@@ -94,19 +94,11 @@ extension GroceryCreateList {
 }
 
 
-
 protocol GroceryCreateData{
-    var groceryList: [GroceryList] { get set } // NOTE declared in two protocols or more
-
-    var selectedGroceryListIndex: Int { get set } // NOTE - declared in multiple protocols
-
-    var managedObjectContext: NSManagedObjectContext? { get set } //NOTE common - put in generic protocol for others to rely on?
-    
     func create(data: (itemName: String?, itemQuantity: Int)) throws
-    func save() throws // NOTE declared in multiple protocols
 }
 
-extension GroceryCreateData{
+extension GroceryCreateData where Self: GenericListVariables, Self: GenericSaveVariables {
     func create(data: (itemName: String?, itemQuantity: Int)) throws {
         guard let ctx = managedObjectContext else {
             throw GroceryListError.BadManagedObjectContext("The managed object context was nil")
@@ -118,64 +110,6 @@ extension GroceryCreateData{
         obj.itemName = data.itemName
         obj.itemQuantity = Int16(data.itemQuantity)
         obj.groceryList = groceryList.value(at: selectedGroceryListIndex)
-        
-        try? save()
-    }
-}
-
-protocol GroceryEditList {
-    var managedObjectContext: NSManagedObjectContext? { get set } //NOTE common - put in generic protocol for others to rely on?
-    
-    var groceryList: [GroceryList] { get set } // NOTE declared in two protocols or more
-
-    func save() throws // NOTE declared in multiple protocols
-    func remove(groceryListNamed groceryListName: String?) throws
-}
-
-extension GroceryEditList {
-    func remove(groceryListNamed groceryListName: String?) throws {
-        guard let ctx = managedObjectContext else {
-            throw GroceryListError.BadManagedObjectContext("The managed object context was nil")
-        }
-        
-        //MARK: The larger block returned an error of "cannot call value of non-function type"
-//        let list = groceryList.first { list in
-//            return list.name == groceryListName
-//        }
-        
-        
-        let list = groceryList.first
-        
-        if let listToBeDeleted = list {
-            ctx.delete(list!)
-        }
-        
-        try? save()
-    }
-}
-
-
-protocol GroceryEditData {
-    var managedObjectContext: NSManagedObjectContext? { get set } //NOTE common - put in generic protocol for others to rely on?
-    
-    var groceryData: [GroceryData] { get set }
-    
-    func remove(data: (itemName: String?, itemQuantity: Int)) throws
-    func save() throws // NOTE declared in multiple protocols
-}
-
-extension GroceryEditData {
-    func remove(data: (itemName: String?, itemQuantity: Int)) throws {
-        guard let ctx = managedObjectContext else {
-            throw GroceryListError.BadManagedObjectContext("The managed object context was nil")
-        }
-        
-        //MARK: The larger block returned an error of "cannot call value of non-function type"
-        let data = groceryData.first
-        
-        if let dataToBeDeleted = data {
-            ctx.delete(data!)
-        }
         
         try? save()
     }

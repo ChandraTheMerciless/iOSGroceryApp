@@ -11,7 +11,7 @@ import UIKit
 class ItemsTableViewController: UITableViewController {
     
     @IBOutlet var GroceryDataView: UITableView?
-    var manager: (GroceryGetData & GroceryEditData) = GroceryListManager.shared
+    var manager: (GenericListVariables & GroceryGetData) = GroceryListManager.shared
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,18 +45,5 @@ class ItemsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true;
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == UITableViewCellEditingStyle.delete) {
-            let dataRow = manager.getGroceryData(from: indexPath);
-            
-            //handle delete stuff here
-            
-            try? manager.remove(data: (dataRow?.itemName, (dataRow?.itemQuantity)! as Int))
-            manager.groceryList.remove(at: indexPath.row)
-            
-            GroceryDataView?.reloadData()
-        }
     }
 }
