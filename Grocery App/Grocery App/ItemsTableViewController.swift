@@ -42,8 +42,4 @@ class ItemsTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: UIView.areAnimationsEnabled)
         manager.selectedGroceryDataIndex = indexPath.row
     }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true;
-    }
 }

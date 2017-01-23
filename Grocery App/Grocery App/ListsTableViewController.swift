@@ -45,8 +45,4 @@ class ListsTableViewController: UITableViewController {
         
         manager.selectedGroceryListIndex = indexPath.row
     }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true;
-    }
 }
